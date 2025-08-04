@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-import google_ai
+from utils import google_ai
 
 app = Flask(__name__)
 
