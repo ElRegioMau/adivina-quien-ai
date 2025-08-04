@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Adivina Quién AI</title>
+    <meta charset="UTF-8">
+    <title>Adivina Quién AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <h1>Adivina Quién con IA</h1>
-  <input type="text" id="question" placeholder="Escribe tu pregunta aquí...">
-  <button onclick="sendQuestion()">Preguntar</button>
-  <p id="answer"></p>
-  <audio id="audio" controls></audio>
-
-  <script src="/static/script.js"></script>
+    <div class="container">
+        <h1>Adivina Quién AI</h1>
+        <div id="start-section">
+            <p id="think-text">Piensa en un personaje</p>
+            <button id="ready-btn">Listo</button>
+        </div>
+        <div id="game-section" style="display:none;">
+            <p id="question-text"></p>
+            <div id="answer-buttons" style="display:none;">
+                <button class="answer-btn" data-answer="Si">Si</button>
+                <button class="answer-btn" data-answer="No">No</button>
+                <button class="answer-btn" data-answer="No estoy seguro">No estoy seguro</button>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

@@ -1,22 +1,24 @@
 from flask import Flask, render_template, request, jsonify
-from utils.gpt_ai import ask_gpt
-from utils.tts_ai import text_to_speech
-import os
-from dotenv import load_dotenv
+import google_ai
 
-load_dotenv()
 app = Flask(__name__)
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/ask', methods=['POST'])
-def ask():
-    question = request.json.get('question')
-    answer = ask_gpt(question)
-    audio_url = text_to_speech(answer)
-    return jsonify({'answer': answer, 'audio_url': audio_url})
+@app.route('/start_game')
+def start_game():
+    question = google_ai.get_first_question()
+    return jsonify({'question': question})
+
+@app.route('/answer', methods=['POST'])
+def answer():
+    data = request.get_json()
+    answer = data.get('answer')
+    # Puedes mantener un contexto de juego si lo deseas
+    next_question = google_ai.get_next_question(answer, context={})
+    return jsonify({'next_question': next_question})
 
 if __name__ == '__main__':
     app.run(debug=True)
