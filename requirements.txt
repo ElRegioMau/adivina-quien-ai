@@ -1,4 +1,6 @@
 flask
-openai
+google-cloud-texttospeech
+google-cloud-language
 python-dotenv
 requests
+protobuf>=3.20,<6
